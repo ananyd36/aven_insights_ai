@@ -1,67 +1,70 @@
-# Next.js Template
+# Aven Insights AI Customer Care Chatbot
 
-This is a template repository showcasing Next.js Server Actions, React Server Components, and modern data fetching patterns. The project includes a Todo list implementation and examples of API integration with proper loading states and error handling.
+A modern, extensible AI-powered customer care chatbot built with Next.js, featuring a beautiful chat interface, ready for integration with web-scraped knowledge bases, vector search, and voice chat.
 
-## Features
+---
 
-- **Todo List**: Server-side data mutations using Next.js Server Actions
-- **Data Fetching Example**: Demonstrates React Suspense and loading states
-- **Modern UI**: Built with Shadcn UI components and Tailwind CSS
-- **Error Handling**: Proper error boundaries and user feedback
-- **Type Safety**: Full TypeScript support
+## ✨ Features
+- **Modern Chatbot UI**: Clean, responsive interface with message bubbles and a microphone button for future voice chat.
+- **Next.js 13+ App Router**: Built using the latest Next.js features for scalability and performance.
+- **Easy AI Integration**: Ready to connect to LLMs and vector databases for retrieval-augmented generation (RAG).
+- **Planned Voice Support**: Microphone button included for upcoming voice-to-text chat.
 
-## Tech Stack
+---
 
-- [Next.js](https://nextjs.org) - React framework
-- [Shadcn UI](https://ui.shadcn.com/) - Component library
-- [Tailwind CSS](https://tailwindcss.com) - Styling
-- [TypeScript](https://www.typescriptlang.org/) - Type safety
+## 🚀 Getting Started
 
-## Getting Started
+### 1. Clone the Repository
+```bash
+git clone <your-repo-url>
+cd aven_insights_ai
+```
 
-1. Clone the repository
-2. Install dependencies:
-
+### 2. Install Dependencies
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
 ```
 
-3. Set up your environment variables in the `.env` file.
-
-4. Start the development server:
-
+### 3. Run the Development Server
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```
+Visit [http://localhost:3000](http://localhost:3000) to see the chatbot in action.
+
+---
+
+## 🧩 Project Structure
+```
+aven_insights_ai/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   └── Chatbot.tsx   # Main chatbot UI
+│   │   └── page.tsx          # Renders the chatbot
+│   └── ...                   # Other Next.js app files
+├── public/                   # Static assets
+├── README.md
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+---
 
-## Project Structure
+## 🗺️ Roadmap
+- **Web Scraping**: Collect company website data for knowledge base.
+- **Vector Database**: Store embeddings for semantic search (e.g., Chroma, Pinecone, Weaviate).
+- **LLM Integration**: Connect to OpenAI, local LLMs, or other APIs for intelligent answers.
+- **Voice Chat**: Add speech-to-text and text-to-speech for hands-free support.
+- **Search API Integration**: Supplement answers with external search (e.g., mcp server).
 
-- `app/page.tsx` - Main page with Todo list implementation
-- `app/example/page.tsx` - Data fetching example with loading states
-- `app/actions/*` - Server Actions for data mutations
-- `components/ui/*` - Shadcn UI components
+---
 
-## Learn More
+## 🛠️ Customization & Extending
+- Replace the demo bot logic in `Chatbot.tsx` with your own backend or API calls.
+- Add your web scraping and embedding pipeline for knowledge ingestion.
+- Integrate a vector DB and LLM for production-ready RAG.
+- Enhance the UI or add new features as needed.
 
-To learn more about the technologies used in this project:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - Next.js features and API
-- [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions) - Learn about Next.js Server Actions
-- [Shadcn UI Documentation](https://ui.shadcn.com) - Learn about Shadcn UI components
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - Learn about Tailwind CSS
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+MIT
