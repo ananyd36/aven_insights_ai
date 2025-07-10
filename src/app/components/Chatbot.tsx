@@ -37,8 +37,31 @@ export const Chatbot: React.FC = () => {
     console.log("Microphone button clicked. Integrate voice here.");
   };
 
+  const handleRefreshKnowledgeBase = async () => {
+    try {
+      const res = await fetch("/api/refresh-knowledge-base", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success) {
+        console.log("Knowledge base refreshed!", data.data.results[0].text);
+      } else {
+        console.error("Refresh failed:", data.error);
+      }
+    } catch (err) {
+      console.error("Error refreshing knowledge base:", err);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-zinc-900 to-black py-8">
+      {/* Refresh Knowledge Base Button */}
+      <button
+        onClick={handleRefreshKnowledgeBase}
+        className="fixed top-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+      >
+        Refresh Knowledge Base
+      </button>
       <div className="w-full max-w-md rounded-2xl shadow-2xl bg-zinc-950/90 border border-zinc-800 p-6">
         <h1 className="text-3xl font-bold text-center text-white mb-6 tracking-tight">Aven Insights</h1>
         <div className="h-80 overflow-y-auto bg-zinc-900 rounded-lg p-4 mb-4 border border-zinc-800">
