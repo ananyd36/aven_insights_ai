@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 
+
 interface Message {
   sender: "user" | "bot";
   text: string;
@@ -18,19 +19,32 @@ export const Chatbot: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = (e: React.FormEvent) => {
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
     const userMessage = { sender: "user" as const, text: input };
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage, { sender: "bot", text: "Thinking..." }]);
+    const currentInput = input;
     setInput("");
-    // Simulate bot response
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/query-knowledge-base", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: currentInput })
+      });
+      const data = await res.json();
+      console.log(data);
       setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "I'm just a demo bot! (Integrate your AI here)" },
+        ...prev.slice(0, -1), // remove the "Thinking..." message
+        
+        { sender: "bot", text: data.answer || "Sorry, I couldn't find an answer." }
       ]);
-    }, 800);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev.slice(0, -1),
+        { sender: "bot", text: "Sorry, there was an error getting the answer." }
+      ]);
+    }
   };
 
   const handleMicClick = () => {
@@ -44,9 +58,9 @@ export const Chatbot: React.FC = () => {
       });
       const data = await res.json();
       if (data.success) {
-        console.log("Knowledge base refreshed!", data.data.results[0].text);
+        console.log("Knowledge base refreshed!", data.data.exaResult);
       } else {
-        console.error("Refresh failed:", data.error);
+        console.error("Refresh failed:", data.error );
       }
     } catch (err) {
       console.error("Error refreshing knowledge base:", err);
