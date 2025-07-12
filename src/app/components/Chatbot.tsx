@@ -37,7 +37,7 @@ export const Chatbot: React.FC = () => {
       });
       const data = await res.json();
       
-      const responseText = data.answer || "Sorry, I couldn't find an answer.";
+      const responseText = data.answer || "Sorry, I couldn&#39;t find an answer.";
       
       setMessages((prev) => [
         ...prev.slice(0, -1), // remove the "Thinking..." message
@@ -89,7 +89,7 @@ export const Chatbot: React.FC = () => {
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
               </svg>
             </div>
-            <div className="text-white text-lg font-semibold">Refreshing Aven's Knowledge Base...</div>
+            <div className="text-white text-lg font-semibold">Refreshing Aven&#39;s Knowledge Base...</div>
           </div>
         </div>
       )}
@@ -128,7 +128,7 @@ export const Chatbot: React.FC = () => {
                   )}
                   {msg.source === "knowledge_base" && (
                     <div className="mt-2 text-xs text-emerald-400 font-medium">
-                      ✅ Verified from Aven's Knowledge Base
+                      ✅ Verified from Aven&#39;s Knowledge Base
                     </div>
                   )}
                 </div>
