@@ -13,10 +13,10 @@ const pinecone_index = process.env.NEXT_PUBLIC_PINECONE_INDEX;
 export async function POST() {
 
 
-    const ai = new GoogleGenAI({ apiKey: gemini_api_key });
-    const pinecone = new Pinecone({ apiKey: pinecone_api_key! });
+    const ai = new GoogleGenAI({ apiKey: gemini_api_key as string });
+    const pinecone = new Pinecone({ apiKey: pinecone_api_key as string });
     const Index = pinecone.index("aven");
-    const exa = new Exa(exa_api_key);
+    const exa = new Exa(exa_api_key as string );
 
 
   try {

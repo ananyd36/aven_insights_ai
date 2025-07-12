@@ -2,10 +2,11 @@
 import Exa from "exa-js";
 import { GoogleGenAI } from "@google/genai";
 import { Pinecone } from "@pinecone-database/pinecone";
+import { string } from "zod";
 
 
 
-const gemini_api_key = process.env.GEMINI_GENAI_API_KEY;
+const gemini_api_key = process.env.NEXT_PUBLIC_GEMINI_GENAI_API_KEY;
 const exa_api_key = process.env.EXA_API_KEY;
 const pinecone_api_key = process.env.PINECONE_API_KEY;
 const pinecone_index = process.env.PINECONE_INDEX;
@@ -60,11 +61,11 @@ const exa = new Exa("e37b5f50-2f87-4a23-a3a4-31c84eeafaac");
 //   });
 //   console.log(embeddingRes.embeddings[0].values);
 
-const result = await exa.getContents([
-    "https://www.aven.com",
-  ], {
-    text: true
-  });
-const text = result.results?.[0]?.text;
-console.log("------------------------------------------");
-console.log(text);
+// const result = await exa.getContents([
+//     "https://www.aven.com",
+//   ], {
+//     text: true
+//   });
+// const text = result.results?.[0]?.text;
+// console.log("------------------------------------------");
+// console.log(text);
