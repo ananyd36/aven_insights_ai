@@ -3,11 +3,9 @@ import Exa from "exa-js";
 import { GoogleGenAI } from "@google/genai";
 import { Pinecone } from "@pinecone-database/pinecone";
 
-const gemini_api_key = process.env.NEXT_PUBLIC_GEMINI_GENAI_API_KEY;
-const exa_api_key = process.env.NEXT_PUBLIC_EXA_API_KEY;
-const pinecone_api_key = process.env.NEXT_PUBLIC_PINECONE_API_KEY;
-const pinecone_index = process.env.NEXT_PUBLIC_PINECONE_INDEX;
-
+const gemini_api_key = process.env.GEMINI_GENAI_API_KEY;
+const exa_api_key = process.env.EXA_API_KEY;
+const pinecone_api_key = process.env.PINECONE_API_KEY;
 
 
 export async function POST() {

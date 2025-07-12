@@ -37,7 +37,7 @@ export const Chatbot: React.FC = () => {
       });
       const data = await res.json();
       
-      let responseText = data.answer || "Sorry, I couldn't find an answer.";
+      const responseText = data.answer || "Sorry, I couldn&apos;t find an answer.";
       
       setMessages((prev) => [
         ...prev.slice(0, -1), // remove the "Thinking..." message
@@ -47,7 +47,7 @@ export const Chatbot: React.FC = () => {
           source: data.source
         }
       ]);
-    } catch (err) {
+    } catch {
       setMessages((prev) => [
         ...prev.slice(0, -1),
         { sender: "bot", text: "Sorry, there was an error getting the answer." }
@@ -55,27 +55,21 @@ export const Chatbot: React.FC = () => {
     }
   };
 
-  const handleMicClick = () => {
-    console.log("Microphone button clicked. Integrate voice here.");
-  };
-
   const handleRefreshKnowledgeBase = async () => {
     setIsRefreshing(true);
     try {
-      const res = await fetch("/api/refresh-knowledge-base", {
+      await fetch("/api/refresh-knowledge-base", {
         method: "POST",
       });
-      const data = await res.json();
       setMessages((prev) => [
         ...prev,
         { sender: "bot", text: "Knowledge base refreshed!" },
       ]);
-    } catch (err) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         { sender: "bot", text: "Error refreshing knowledge base." },
       ]);
-      console.error("Error refreshing knowledge base:", err);
     } finally {
       setIsRefreshing(false);
     }
@@ -95,7 +89,7 @@ export const Chatbot: React.FC = () => {
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
               </svg>
             </div>
-            <div className="text-white text-lg font-semibold">Refreshing Aven's Knowledge Base...</div>
+            <div className="text-white text-lg font-semibold">Refreshing Aven&apos;s Knowledge Base...</div>
           </div>
         </div>
       )}
@@ -134,7 +128,7 @@ export const Chatbot: React.FC = () => {
                   )}
                   {msg.source === "knowledge_base" && (
                     <div className="mt-2 text-xs text-emerald-400 font-medium">
-                      ✅ Verified from Aven's Knowledge Base
+                      ✅ Verified from Aven&apos;s Knowledge Base
                     </div>
                   )}
                 </div>

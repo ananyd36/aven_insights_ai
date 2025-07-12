@@ -2,9 +2,8 @@ import { NextResponse } from "next/server";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { GoogleGenAI } from "@google/genai";
 
-const gemini_api_key = process.env.NEXT_PUBLIC_GEMINI_GENAI_API_KEY;
+const gemini_api_key = process.env.GEMINI_GENAI_API_KEY;
 const pinecone_api_key = process.env.NEXT_PUBLIC_PINECONE_API_KEY;
-const pinecone_index = process.env.NEXT_PUBLIC_PINECONE_INDEX;
 
 export async function POST(req: Request) {
   try {
