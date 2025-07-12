@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     // 2. Query Pinecone for the most relevant chunk
     const pinecone = new Pinecone({ apiKey: pinecone_api_key! });
-    const index = pinecone.index(pinecone_index!);
+    const index = pinecone.index("aven");
     const queryResult = await index.query({
       topK: 1,
       vector: queryEmbedding,
