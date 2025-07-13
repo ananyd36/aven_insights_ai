@@ -16,6 +16,7 @@ export const Chatbot: React.FC = () => {
   ]);
   const [input, setInput] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [refreshStatus, setRefreshStatus] = useState<"loading" | "success" | "error" | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -57,22 +58,26 @@ export const Chatbot: React.FC = () => {
 
   const handleRefreshKnowledgeBase = async () => {
     setIsRefreshing(true);
+    setRefreshStatus("loading");
     try {
-      await fetch("/api/refresh-knowledge-base", {
+      const res = await fetch("/api/refresh-knowledge-base", {
         method: "POST",
       });
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "Knowledge base refreshed!" },
-      ]);
+      const data = await res.json();
+      
+      if (data.success) {
+        setRefreshStatus("success");
+      } else {
+        setRefreshStatus("error");
+      }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "Error refreshing knowledge base." },
-      ]);
-    } finally {
-      setIsRefreshing(false);
+      setRefreshStatus("error");
     }
+  };
+
+  const closeModal = () => {
+    setIsRefreshing(false);
+    setRefreshStatus(null);
   };
 
   return (
@@ -82,14 +87,52 @@ export const Chatbot: React.FC = () => {
       {/* Modal for refreshing knowledge base */}
       {isRefreshing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-          <div className="bg-zinc-900 rounded-xl shadow-2xl p-8 flex flex-col items-center border border-zinc-700">
-            <div className="mb-4">
-              <svg className="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-              </svg>
-            </div>
-            <div className="text-white text-lg font-semibold">Refreshing Knowledge Base...</div>
+          <div className="bg-zinc-900 rounded-xl shadow-2xl p-8 flex flex-col items-center border border-zinc-700 max-w-md w-full mx-4">
+            {refreshStatus === "loading" && (
+              <>
+                <div className="mb-4">
+                  <svg className="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                  </svg>
+                </div>
+                <div className="text-white text-lg font-semibold text-center">Refreshing  Knowledge Base...</div>
+              </>
+            )}
+            
+            {refreshStatus === "success" && (
+              <>
+                <div className="mb-4">
+                  <svg className="h-12 w-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div className="text-white text-lg font-semibold text-center mb-4">Knowledge Base Refreshed Successfully!</div>
+                <button
+                  onClick={closeModal}
+                  className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg transition-colors"
+                >
+                  Close
+                </button>
+              </>
+            )}
+            
+            {refreshStatus === "error" && (
+              <>
+                <div className="mb-4">
+                  <svg className="h-12 w-12 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </div>
+                <div className="text-white text-lg font-semibold text-center mb-4">Failed to Refresh Knowledge Base</div>
+                <button
+                  onClick={closeModal}
+                  className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg transition-colors"
+                >
+                  Close
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}
