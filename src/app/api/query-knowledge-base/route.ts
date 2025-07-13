@@ -3,7 +3,7 @@ import { Pinecone } from "@pinecone-database/pinecone";
 import { GoogleGenAI } from "@google/genai";
 
 const gemini_api_key = process.env.GEMINI_GENAI_API_KEY;
-const pinecone_api_key = process.env.NEXT_PUBLIC_PINECONE_API_KEY;
+const pinecone_api_key = process.env.PINECONE_API_KEY;
 
 export async function POST(req: Request) {
   try {
@@ -62,7 +62,7 @@ export async function POST(req: Request) {
       **Instructions:**
       
       - Provide a clear, concise, and factual answer **based only on the context**.
-      - **Do not** include explanations about the context itself.
+      - **Do not** include explanations about the context itself. Just use slightly elaborated answer based on the context if possible!
       - If the context does **not contain relevant information** to answer the query, respond with:
         > "The provided context does not contain enough information to answer this question."
       
@@ -96,16 +96,16 @@ export async function POST(req: Request) {
       if (isContextIrrelevant) {
         // Fall back to general knowledge response
         const generalPrompt = `
-        You are a helpful AI assistant for Aven, a financial services company. The user has asked a question that isn't covered in our specific knowledge base, so please provide a helpful and informative response using your general knowledge. Refer this website : https://www.aven.com/
+        You are a helpful AI assistant for Aven, a financial services company. The user has asked a question that isn't covered in our specific knowledge base, so please provide a helpful and informative response using your search tool. Refer this website : https://www.aven.com/
         
         **User Query:** ${query}
         
         **Instructions:**
-        - Provide a helpful, accurate, and informative response
+        - Provide a clear, concise, and factual response
         - If the question is related to financial services, home equity, or similar topics, provide relevant information
         - Be conversational and friendly
         - If you're not sure about something, acknowledge the limitations
-        - Keep responses concise but informative
+        - Keep responses concise!
         - Always encourage users to verify information with official sources or contact Aven directly
         - End your response with a note to verify with official sources
         

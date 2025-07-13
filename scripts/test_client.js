@@ -6,14 +6,18 @@ import { string } from "zod";
 
 
 
-const gemini_api_key = process.env.NEXT_PUBLIC_GEMINI_GENAI_API_KEY;
+const gemini_api_key = process.env.GEMINI_GENAI_API_KEY;
 const exa_api_key = process.env.EXA_API_KEY;
 const pinecone_api_key = process.env.PINECONE_API_KEY;
 const pinecone_index = process.env.PINECONE_INDEX;
 
+console.log("=== Environment Variables Debug ===");
+console.log("GEMINI_GENAI_API_KEY:", gemini_api_key ? "✅ Set" : "❌ Undefined");
+console.log("EXA_API_KEY:", exa_api_key ? "✅ Set" : "❌ Undefined");
+console.log("PINECONE_API_KEY:", pinecone_api_key ? "✅ Set" : "❌ Undefined");
+console.log("All env vars:", Object.keys(process.env).filter(key => key.includes('GEMINI') || key.includes('EXA') || key.includes('PINECONE')));
+console.log("===================================");
 
-const ai = new GoogleGenAI({ apiKey: "AIzaSyC9RcGRQ_Myk544etFx7qAwerhNH9sh7vY" });
-const exa = new Exa("e37b5f50-2f87-4a23-a3a4-31c84eeafaac");
 
 // const embeddingRes = await ai.models.embedContent({
 // 	model: 'text-embedding-004',
