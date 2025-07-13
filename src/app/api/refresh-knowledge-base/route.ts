@@ -23,7 +23,7 @@ export async function POST() {
       {
         url: "https://www.aven.com/support",
         category: "support",
-        regex: /(##### .+?)(?=^##### |\Z)/gms, // FAQ sections
+        regex: /(?:^|\n\n)- .+?(?=(\n\n- |\n*$))/gs, // FAQ entries
         description: "Support FAQ content"
       },
       {
