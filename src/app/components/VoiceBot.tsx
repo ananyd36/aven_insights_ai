@@ -12,7 +12,6 @@ export const VoiceBot: React.FC = () => {
   const [vapi, setVapi] = useState<Vapi | null>(null)
   const [isConnected, setIsConnected] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
-  const [transcript, setTranscript] = useState<Array<{ role: string, text: string }>>([])
 
   useEffect(() => {
     if (!apiKey || !assistantId) return
