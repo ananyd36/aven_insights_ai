@@ -25,11 +25,6 @@ export const VoiceBot: React.FC = () => {
     })
     vapiInstance.on('speech-start', () => setIsSpeaking(true))
     vapiInstance.on('speech-end', () => setIsSpeaking(false))
-    vapiInstance.on('message', (message) => {
-      if (message.type === 'transcript') {
-        setTranscript(prev => [...prev, { role: message.role, text: message.transcript }])
-      }
-    })
     vapiInstance.on('error', (error) => console.error('Vapi error:', error))
 
     return () => {
