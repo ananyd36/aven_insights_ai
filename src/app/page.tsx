@@ -1,29 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { Chatbot } from "./components/Chatbot";
-import { VoiceBot } from "./components/VoiceBot";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [selectedMode, setSelectedMode] = useState<"chat" | "voice" | null>(null);
-
-  if (selectedMode === "chat") {
-    return <Chatbot />;
-  }
-
-  if (selectedMode === "voice") {
-    return <VoiceBot />;
-  }
+  const router = useRouter();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-900 to-black flex items-center justify-center">
       <div className="text-center space-y-8">
         <h1 className="text-4xl font-bold text-white mb-8">Aven Insights</h1>
         <p className="text-xl text-zinc-400 mb-12">How would you like to interact with us?</p>
-        
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <button
-            onClick={() => setSelectedMode("chat")}
+            onClick={() => router.push('/chat')}
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg transition-colors flex items-center justify-center space-x-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -31,9 +20,8 @@ export default function Home() {
             </svg>
             <span>Chat</span>
           </button>
-          
           <button
-            onClick={() => setSelectedMode("voice")}
+            onClick={() => router.push('/voice')}
             className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-4 rounded-lg transition-colors flex items-center justify-center space-x-3"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
