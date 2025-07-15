@@ -71,7 +71,6 @@ export const VoiceBot: React.FC = () => {
                     End Call
                   </button>
                 </div>
-                {/* Transcript removed as per user request */}
               </div>
             )}
           </div>
