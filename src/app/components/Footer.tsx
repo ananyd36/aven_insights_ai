@@ -31,9 +31,9 @@ export const Footer: React.FC = () => {
             </a>
           </div>
           
-          <div className="text-zinc-500 text-xs text-center">
+          {/* <div className="text-zinc-500 text-xs text-center">
             © 2024 Aven. All rights reserved.
-          </div>
+          </div> */}
           
 
         </div>
